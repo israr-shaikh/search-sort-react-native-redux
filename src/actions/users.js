@@ -23,19 +23,19 @@ export const searchUserSuccess = (data, text, total) => ({
   type: types.SEARCH_USERS_SUCCESS,
   payload: data,
   text,
-  total
+  total,
 });
 
 export const sortUserSuccess = (data, sort, total) => ({
   type: types.SORT_USERS_SUCCESS,
   payload: data,
   sort,
-  total
+  total,
 });
 
-export const pagination = (pageNum) => ({
+export const pagination = pageNum => ({
   type: types.CHANGE_PAGE,
-  payload: pageNum
+  payload: pageNum,
 });
 
 export const changeConnection = flag => ({
@@ -71,7 +71,9 @@ export const searchList = text => {
       let state = store.getState();
       let {usersList} = state.users;
       let filteredList = usersList.filter(
-        item => item.first_name.toLowerCase().includes(text.toLowerCase()) || item.last_name.toLowerCase().includes(text.toLowerCase()),
+        item =>
+          item.first_name.toLowerCase().includes(text.toLowerCase()) ||
+          item.last_name.toLowerCase().includes(text.toLowerCase()),
       );
       dispatch(searchUserSuccess(filteredList, text, filteredList.length));
     } catch (error) {
@@ -85,35 +87,43 @@ export const sortList = () => {
     dispatch(fetchingCommonRequest());
     try {
       let state = store.getState();
-      let {data, sort } = state.users;
-      let user = [...data]
+      let {data, sort} = state.users;
+      let user = [...data];
       let sortedList = [];
-      if(sort){
+      if (sort) {
         sort = true;
-        sortedList = user.sort((a, b) => b.first_name.localeCompare(a.first_name) || b.last_name.localeCompare(a.last_name) )
-      }else{
+        sortedList = user.sort(
+          (a, b) =>
+            b.first_name.localeCompare(a.first_name) ||
+            b.last_name.localeCompare(a.last_name),
+        );
+      } else {
         sort = false;
-        sortedList = user.sort((a, b) => a.first_name.localeCompare(b.first_name) || a.last_name.localeCompare(b.last_name) )
+        sortedList = user.sort(
+          (a, b) =>
+            a.first_name.localeCompare(b.first_name) ||
+            a.last_name.localeCompare(b.last_name),
+        );
       }
-      dispatch(sortUserSuccess(sortedList,!sort,sortedList.length));
+      dispatch(sortUserSuccess(sortedList, !sort, sortedList.length));
     } catch (error) {
       dispatch(fetchingCommonFailure(error.message));
     }
   };
 };
 
-export const changePage = (flag) => {
+export const changePage = flag => {
   return dispatch => {
     dispatch(fetchingCommonRequest());
     try {
       let state = store.getState();
       let {pageNum} = state.users;
-      if(flag){
+      if (flag) {
         pageNum++;
-      }else{
+      } else {
         pageNum--;
       }
-       console.log(pageNum); 
+      console.log(pageNum);
       dispatch(pagination(pageNum));
     } catch (error) {
       dispatch(fetchingCommonFailure(error.message));
