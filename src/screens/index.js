@@ -11,6 +11,9 @@ import {getUserList} from '../actions/users';
 import SearchBar from '../components/searchBar';
 import UserList from '../components/userList';
 import Styles from '../config/stylesheet';
+import * as HOC from '../HOC';
+
+const ScrollViewIndicator = HOC.ActivityIndicator(ScrollView);
 
 class Home extends Component {
   constructor(props) {
@@ -32,13 +35,14 @@ class Home extends Component {
         <View style={Styles.userTotal}>
           <Text>{total} Users </Text>
         </View>
-        <ScrollView
-          keyboardDismissMode={"on-drag"}
+        <ScrollViewIndicator
+          spinner={this.props.users.isFetching}
+          keyboardDismissMode={'on-drag'}
           keyboardShouldPersistTaps="handled"
           showsVerticalScrollIndicator={false}
           style={{flex: 0.85}}>
           <UserList navigation={navigation} />
-        </ScrollView>
+        </ScrollViewIndicator>
       </SafeAreaView>
     );
   }
