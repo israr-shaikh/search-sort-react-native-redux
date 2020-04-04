@@ -16,7 +16,6 @@ export default class Profile extends Component {
 
   render() {
     let {first_name, last_name, avatar, email} = this.props.route.params.item;
-    console.log('test');
     return (
       <View style={Styles.container}>
           <View
