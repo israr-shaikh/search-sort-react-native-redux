@@ -23,6 +23,7 @@ class OfflineNotice extends PureComponent {
   };
 
   render() {
+    console.log({isConnected});
     if (!this.props.isConnected) {
       return (
         <View style={styles.offlineContainer}>
