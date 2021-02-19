@@ -123,7 +123,6 @@ export const changePage = flag => {
       } else {
         pageNum--;
       }
-      console.log(pageNum);
       dispatch(pagination(pageNum));
     } catch (error) {
       dispatch(fetchingCommonFailure(error.message));

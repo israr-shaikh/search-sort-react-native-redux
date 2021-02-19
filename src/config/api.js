@@ -17,7 +17,6 @@ export default class ConnectionAPI {
           callback(responseJson);
         })
         .catch((error)=> {
-          console.log(error)
           let errorMsg = JSON.stringify(error.message);
           let title = '';
           let desc = '';

@@ -27,7 +27,7 @@ class Home extends Component {
   }
 
   render() {
-    let {total} = this.props.users;
+    let {total, isFetching} = this.props.users;
     let {navigation} = this.props;
     return (
       <SafeAreaView style={Styles.container}>
@@ -36,7 +36,7 @@ class Home extends Component {
           <Text>{total} Users </Text>
         </View>
         <ScrollViewIndicator
-          spinner={this.props.users.isFetching}
+          spinner={isFetching}
           keyboardDismissMode={'on-drag'}
           keyboardShouldPersistTaps="handled"
           showsVerticalScrollIndicator={false}
@@ -48,7 +48,7 @@ class Home extends Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     ...state,
   };

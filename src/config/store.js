@@ -1,12 +1,13 @@
-import {createStore,applyMiddleware} from 'redux';
+import {createStore, applyMiddleware} from 'redux';
 import thunk from 'redux-thunk';
-import { createLogger } from 'redux-logger' 
-import reducer from "../reducers/index";
+// import {createLogger} from 'redux-logger';
+import reducer from '../reducers/index';
 
-const logger = createLogger({
-    predicate: (getState, action) => __DEV__});
+// const logger = createLogger({
+//   predicate: (getState, action) => __DEV__,
+// });
 
-const createStoreWithMiddleware = applyMiddleware(thunk,logger)(createStore);
+const createStoreWithMiddleware = applyMiddleware(thunk)(createStore);
 
 const store = createStoreWithMiddleware(reducer);
 
